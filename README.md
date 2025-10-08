@@ -1,2 +1,2 @@
 # Adi_portfolio
-Demo website of photography portfolio to understand the django flow  
+Demo responsive website of photography portfolio to understand the django flow  
