@@ -1,0 +1,534 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Adithya's Photography & Reels Portfolio</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #111827;
+            color: #ffffff;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header Styles */
+        header {
+            padding: 80px 0;
+            text-align: center;
+            background: linear-gradient(135deg, #111827 0%, #1f2937 100%);
+        }
+
+        h1 {
+            font-size: 4rem;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            margin-bottom: 20px;
+            background: linear-gradient(135deg, #ffffff, #9ca3af);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .tagline {
+            font-size: 1.5rem;
+            color: #9ca3af;
+            font-weight: 300;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* Main Content */
+        main {
+            padding: 60px 0;
+        }
+
+        section {
+            margin-bottom: 80px;
+        }
+
+        h2 {
+            font-size: 3rem;
+            font-weight: 600;
+            text-align: center;
+            margin-bottom: 50px;
+            color: #ffffff;
+        }
+
+        /* Grid Layouts */
+        .photography-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+
+        .reels-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            justify-items: center;
+        }
+
+        /* Card Styles */
+        .card {
+            background: #1f2937;
+            border-radius: 15px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+        }
+
+        .card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+        }
+
+        /* Photography Cards */
+        .photo-card {
+            aspect-ratio: 16/10;
+            position: relative;
+        }
+
+        .photo-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+
+        .photo-card:hover img {
+            transform: scale(1.05);
+        }
+
+        .photo-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(transparent, rgba(0, 0, 0, 0.8));
+            padding: 30px 20px 20px;
+            transform: translateY(100%);
+            transition: transform 0.3s ease;
+        }
+
+        .photo-card:hover .photo-overlay {
+            transform: translateY(0);
+        }
+
+        .photo-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+
+        .photo-description {
+            font-size: 0.9rem;
+            color: #d1d5db;
+        }
+
+        /* Reels Cards */
+        .reel-card {
+            width: 100%;
+            max-width: 300px;
+            aspect-ratio: 9/16;
+            position: relative;
+        }
+
+        .reel-card video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 15px;
+        }
+
+        .play-button {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 60px;
+            height: 60px;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            opacity: 0.8;
+        }
+
+        .play-button::before {
+            content: '';
+            width: 0;
+            height: 0;
+            border-left: 15px solid #111827;
+            border-top: 10px solid transparent;
+            border-bottom: 10px solid transparent;
+            margin-left: 3px;
+        }
+
+        .play-button:hover {
+            background: rgba(255, 255, 255, 1);
+            transform: translate(-50%, -50%) scale(1.1);
+        }
+
+        .reel-card:hover .play-button {
+            opacity: 1;
+        }
+
+        /* Footer */
+        footer {
+            background: #0f172a;
+            padding: 40px 0;
+            text-align: center;
+            color: #6b7280;
+            margin-top: 80px;
+        }
+
+        /* Navigation (if you want to add it later) */
+        .nav-placeholder {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 1000;
+        }
+
+        .nav-button {
+            background: rgba(31, 41, 55, 0.9);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: 500;
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+            margin-left: 10px;
+        }
+
+        .nav-button:hover {
+            background: rgba(55, 65, 81, 0.9);
+            transform: translateY(-2px);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .container {
+                padding: 0 15px;
+            }
+
+            header {
+                padding: 60px 0;
+            }
+
+            h1 {
+                font-size: 2.5rem;
+                margin-bottom: 15px;
+            }
+
+            .tagline {
+                font-size: 1.2rem;
+            }
+
+            h2 {
+                font-size: 2.2rem;
+                margin-bottom: 35px;
+            }
+
+            .photography-grid {
+                grid-template-columns: 1fr;
+                gap: 25px;
+            }
+
+            .reels-grid {
+                grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+                gap: 25px;
+            }
+
+            .reel-card {
+                max-width: 280px;
+            }
+
+            section {
+                margin-bottom: 60px;
+            }
+
+            main {
+                padding: 40px 0;
+            }
+        }
+
+        @media (max-width: 480px) {
+            h1 {
+                font-size: 2rem;
+            }
+
+            .tagline {
+                font-size: 1rem;
+            }
+
+            h2 {
+                font-size: 1.8rem;
+            }
+
+            .photography-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+
+            .reels-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+
+            .reel-card {
+                max-width: 250px;
+            }
+
+            .nav-button {
+                padding: 8px 15px;
+                font-size: 0.9rem;
+            }
+        }
+
+        /* Loading Animation */
+        .loading {
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeInUp 0.6s ease-out forwards;
+        }
+
+        .loading:nth-child(1) {
+            animation-delay: 0.1s;
+        }
+
+        .loading:nth-child(2) {
+            animation-delay: 0.2s;
+        }
+
+        .loading:nth-child(3) {
+            animation-delay: 0.3s;
+        }
+
+        .loading:nth-child(4) {
+            animation-delay: 0.4s;
+        }
+
+        .loading:nth-child(5) {
+            animation-delay: 0.5s;
+        }
+
+        .loading:nth-child(6) {
+            animation-delay: 0.6s;
+        }
+
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Smooth scrolling */
+        html {
+            scroll-behavior: smooth;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Optional Navigation -->
+    <div class="nav-placeholder">
+        <a href="#photography" class="nav-button">Photos</a>
+        <a href="#reels" class="nav-button">Reels</a>
+    </div>
+
+    <!-- Header Section -->
+    <header>
+        <div class="container">
+            <h1>Adithya Photography</h1>
+            <p class="tagline">Capturing Moments. Crafting Stories.</p>
+        </div>
+    </header>
+
+    <main class="container">
+        <!-- Photography Section -->
+        <section id="photography">
+            <h2>Photography</h2>
+            <div class="photography-grid">
+                <!-- Photo 1 - Replace src with your image URL -->
+                <div class="card photo-card loading">
+                    <img src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=800&h=500&fit=crop&crop=face"
+                        alt="Professional Portrait">
+                    <div class="photo-overlay">
+                        <div class="photo-title">Professional Portrait</div>
+                        <div class="photo-description">Elegant studio portrait with natural lighting</div>
+                    </div>
+                </div>
+
+                <!-- Photo 2 - Replace src with your image URL -->
+                <div class="card photo-card loading">
+                    <img src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800&h=500&fit=crop"
+                        alt="Landscape Photography">
+                    <div class="photo-overlay">
+                        <div class="photo-title">Mountain Vista</div>
+                        <div class="photo-description">Breathtaking landscape at golden hour</div>
+                    </div>
+                </div>
+
+                <!-- Photo 3 - Replace src with your image URL -->
+                <div class="card photo-card loading">
+                    <img src="https://images.unsplash.com/photo-1519741497674-611481863552?w=800&h=500&fit=crop"
+                        alt="Wedding Photography">
+                    <div class="photo-overlay">
+                        <div class="photo-title">Wedding Moments</div>
+                        <div class="photo-description">Capturing the perfect celebration</div>
+                    </div>
+                </div>
+
+                <!-- Photo 4 - Replace src with your image URL -->
+                <div class="card photo-card loading">
+                    <img src="https://images.unsplash.com/photo-1492684223066-81342ee5ff30?w=800&h=500&fit=crop"
+                        alt="Event Photography">
+                    <div class="photo-overlay">
+                        <div class="photo-title">Event Coverage</div>
+                        <div class="photo-description">Dynamic event documentation</div>
+                    </div>
+                </div>
+
+                <!-- Photo 5 - Replace src with your image URL -->
+                <div class="card photo-card loading">
+                    <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=800&h=500&fit=crop&crop=face"
+                        alt="Family Photography">
+                    <div class="photo-overlay">
+                        <div class="photo-title">Family Portrait</div>
+                        <div class="photo-description">Warm family moments captured</div>
+                    </div>
+                </div>
+
+                <!-- Photo 6 - Replace src with your image URL -->
+                <div class="card photo-card loading">
+                    <img src="https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=800&h=500&fit=crop"
+                        alt="Commercial Photography">
+                    <div class="photo-overlay">
+                        <div class="photo-title">Commercial Shoot</div>
+                        <div class="photo-description">Professional product photography</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Reels Section -->
+        <section id="reels">
+            <h2>Reels</h2>
+            <div class="reels-grid">
+                <!-- Reel 1 - Replace src with your video URL -->
+                <div class="card reel-card loading">
+                    <video muted loop playsinline
+                        poster="https://images.unsplash.com/photo-1606800052052-a08af7148866?w=300&h=533&fit=crop">
+                        <source src="YOUR_VIDEO_URL_HERE.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                    <div class="play-button"></div>
+                </div>
+
+                <!-- Reel 2 - Replace src with your video URL -->
+                <div class="card reel-card loading">
+                    <video muted loop playsinline
+                        poster="https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=300&h=533&fit=crop">
+                        <source src="YOUR_VIDEO_URL_HERE.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                    <div class="play-button"></div>
+                </div>
+
+                <!-- Reel 3 - Replace src with your video URL -->
+                <div class="card reel-card loading">
+                    <video muted loop playsinline
+                        poster="https://images.unsplash.com/photo-1611162617474-5b21e879e113?w=300&h=533&fit=crop">
+                        <source src="YOUR_VIDEO_URL_HERE.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                    <div class="play-button"></div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 Adithya Photography. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Simple video play/pause functionality
+        document.querySelectorAll('.reel-card').forEach(card => {
+            const video = card.querySelector('video');
+            const playButton = card.querySelector('.play-button');
+
+            card.addEventListener('click', () => {
+                if (video.paused) {
+                    video.play();
+                    playButton.style.opacity = '0';
+                } else {
+                    video.pause();
+                    playButton.style.opacity = '0.8';
+                }
+            });
+
+            video.addEventListener('ended', () => {
+                playButton.style.opacity = '0.8';
+            });
+        });
+
+        // Smooth scroll for navigation
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'start'
+                });
+            });
+        });
+
+        // Add loading animation on scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.animationPlayState = 'running';
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.loading').forEach(el => {
+            observer.observe(el);
+        });
+    </script>
+</body>
+
+</html>
